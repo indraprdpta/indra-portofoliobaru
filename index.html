@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indra Pradipta Eka Putra - Data Science Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent1: #FF5733;
+    --accent2: #7C3AED;
+    --accent3: #0EA5E9;
+    --accent4: #F59E0B;
+    --bg: #0B0B0F;
+    --bg2: #14141A;
+    --bg3: #1E1E2A;
+    --text: #F5F5F5;
+    --muted: #8888AA;
+    --border: rgba(255,255,255,0.08);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(11,11,15,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--text); }
+  .nav-logo span { color: var(--accent1); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.05em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 8rem 3rem 4rem; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 60% 50% at 70% 50%, rgba(124,58,237,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 60% at 20% 80%, rgba(14,165,233,0.12) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 720px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(255,87,51,0.12); border: 1px solid rgba(255,87,51,0.3);
+    font-size: 0.78rem; color: var(--accent1); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent1); display: inline-block; animation: blink 1.5s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 5.5vw, 4.2rem); font-weight: 800; line-height: 1.05; margin-bottom: 1.5rem; }
+  .hero h1 .line2 {
+    background: linear-gradient(90deg, var(--accent2), var(--accent3));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-desc { font-size: 1.05rem; color: var(--muted); max-width: 520px; margin-bottom: 2rem; line-height: 1.8; }
+  .hero-meta { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .hero-meta-item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--muted); }
+  .hero-meta-item strong { color: var(--text); font-weight: 500; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 0.85rem 2rem; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    color: white; text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,58,237,0.35); }
+  .btn-secondary {
+    padding: 0.85rem 2rem; border-radius: 8px;
+    border: 1px solid var(--border); color: var(--text); text-decoration: none;
+    font-size: 0.95rem; transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover { background: var(--bg3); border-color: rgba(255,255,255,0.2); }
+
+  /* STATS */
+  .stats-bar { display: flex; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); }
+  .stat-item { flex: 1; padding: 1.5rem 2rem; text-align: center; border-right: 1px solid var(--border); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--text); }
+  .stat-num span { color: var(--accent1); }
+  .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+  /* SECTION */
+  section { padding: 5rem 3rem; }
+  .section-tag { font-size: 0.75rem; color: var(--accent3); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; margin-bottom: 1rem; }
+  .section-sub { color: var(--muted); max-width: 520px; line-height: 1.8; }
+  .section-header { margin-bottom: 3rem; }
+
+  /* SKILLS */
+  .skills-bg { background: var(--bg2); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .skill-card { background: var(--bg2); padding: 1.75rem; transition: background 0.2s; }
+  .skill-card:hover { background: var(--bg3); }
+  .skill-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .skill-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+  .tag { padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 500; border: 1px solid; }
+  .tag-purple { background: rgba(124,58,237,0.12); color: #A78BFA; border-color: rgba(124,58,237,0.3); }
+  .tag-blue { background: rgba(14,165,233,0.12); color: #38BDF8; border-color: rgba(14,165,233,0.3); }
+  .tag-orange { background: rgba(255,87,51,0.12); color: #FB7451; border-color: rgba(255,87,51,0.3); }
+  .tag-amber { background: rgba(245,158,11,0.12); color: #FCD34D; border-color: rgba(245,158,11,0.3); }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform 0.25s, border-color 0.25s; }
+  .project-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.18); }
+  .project-thumb { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+  .thumb-1 { background: linear-gradient(135deg, rgba(255,87,51,0.2), rgba(124,58,237,0.2)); }
+  .thumb-2 { background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(16,185,129,0.2)); }
+  .thumb-3 { background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(239,68,68,0.2)); }
+  .project-body { padding: 1.5rem; }
+  .project-type { font-size: 0.72rem; color: var(--accent3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+  .project-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.5rem; }
+  .project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .project-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-photo {
+    width: 100%; aspect-ratio: 4/5; border-radius: 12px; background: var(--bg3);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+    font-size: 5rem; position: relative; overflow: hidden;
+  }
+  /*
+   * =============================================
+   * CARA MENAMBAHKAN FOTO PROFIL:
+   * 1. Siapkan foto kamu (misal: foto.jpg)
+   * 2. Taruh foto di folder yang sama dengan index.html
+   * 3. Ganti kode .about-photo di bawah menjadi:
+   *    background-image: url('foto.jpg');
+   *    background-size: cover;
+   *    background-position: center;
+   * 4. Hapus emoji 👤 dari dalam div .about-photo
+   * =============================================
+   */
+  .about-photo-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem;
+    background: linear-gradient(transparent, rgba(11,11,15,0.92));
+  }
+  .about-name { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; }
+  .about-role { font-size: 0.85rem; color: var(--accent3); margin-top: 2px; }
+  .info-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; margin: 1.5rem 0; }
+  .info-list li { display: flex; gap: 1rem; align-items: flex-start; font-size: 0.9rem; }
+  .info-list li .label { color: var(--muted); min-width: 85px; flex-shrink: 0; }
+  .info-list li .value { color: var(--text); }
+  .gpa-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 10px; border-radius: 6px;
+    background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3);
+    font-size: 0.8rem; color: #FCD34D; font-weight: 600;
+  }
+
+  /* CONTACT */
+  .contact-bg { background: var(--bg2); }
+  .contact-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+  .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2.5rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0.75rem 1.5rem; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--bg3);
+    color: var(--text); text-decoration: none; font-size: 0.9rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .contact-link:hover { background: var(--bg); }
+  .contact-link.linkedin:hover { border-color: rgba(14,165,233,0.4); }
+  .contact-link.github:hover { border-color: rgba(255,255,255,0.3); }
+  .contact-link.email-link:hover { border-color: rgba(255,87,51,0.4); }
+  .contact-link.phone:hover { border-color: rgba(16,185,129,0.4); }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 2rem 3rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+  .hero-content > * { animation: fadeUp 0.7s ease both; }
+  .hero-badge { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.25s; }
+  .hero-desc { animation-delay: 0.35s; }
+  .hero-meta { animation-delay: 0.45s; }
+  .hero-cta { animation-delay: 0.55s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .stats-bar { flex-wrap: wrap; }
+    .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">Indra<span>.</span>DS</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Tersedia untuk magang</div>
+    <h1>
+      Turning Data<br>
+      <span class="line2">Into Insights.</span>
+    </h1>
+    <p class="hero-desc">
+      Halo, saya <strong style="color:var(--text)">Indra Pradipta Eka Putra</strong> — mahasiswa Data Science Telkom University yang passionate dalam machine learning, visualisasi data, dan membangun solusi berbasis AI yang berdampak nyata.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">🎓 <strong>Telkom University</strong></div>
+      <div class="hero-meta-item">📊 <strong>S1 Data Science</strong></div>
+      <div class="hero-meta-item">📍 <strong>Bandung, Indonesia</strong></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">Lihat Projects →</a>
+      <a href="#contact" class="btn-secondary">Hubungi Saya</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">12<span>+</span></div>
+    <div class="stat-label">Projects Selesai</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">8<span>+</span></div>
+    <div class="stat-label">Tools Dikuasai</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3<span>x</span></div>
+    <div class="stat-label">Kompetisi Diikuti</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3<span>.17</span></div>
+    <div class="stat-label">IPK / GPA</div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-bg">
+  <div class="section-header">
+    <div class="section-tag">Kemampuan</div>
+    <h2 class="section-title">Tech Stack & Skills</h2>
+    <p class="section-sub">Kombinasi kemampuan teknis dan analitik untuk mengolah data menjadi keputusan bisnis yang tepat.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-name">Programming</div>
+      <p style="font-size:0.85rem;color:var(--muted)">Menulis kode bersih dan efisien untuk analisis dan pemodelan data.</p>
+      <div class="skill-tags">
+        <span class="tag tag-purple">Python</span>
+        <span class="tag tag-blue">R</span>
+        <span class="tag tag-orange">SQL</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-name">Machine Learning</div>
+      <p style="font-size:0.85rem;color:var(--muted)">Membangun dan mengevaluasi model prediktif untuk berbagai kebutuhan bisnis.</p>
+      <div class="skill-tags">
+        <span class="tag tag-purple">Scikit-learn</span>
+        <span class="tag tag-orange">TensorFlow</span>
+        <span class="tag tag-blue">PyTorch</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Data Visualization</div>
+      <p style="font-size:0.85rem;color:var(--muted)">Mengubah data kompleks menjadi visual yang mudah dipahami stakeholder.</p>
+      <div class="skill-tags">
+        <span class="tag tag-blue">Tableau</span>
+        <span class="tag tag-amber">Matplotlib</span>
+        <span class="tag tag-purple">Plotly</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">☁️</div>
+      <div class="skill-name">Data Engineering</div>
+      <p style="font-size:0.85rem;color:var(--muted)">Mengelola pipeline data dan infrastruktur untuk proses analitik skala besar.</p>
+      <div class="skill-tags">
+        <span class="tag tag-orange">Pandas</span>
+        <span class="tag tag-blue">Spark</span>
+        <span class="tag tag-amber">Airflow</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-tag">Portfolio</div>
+    <h2 class="section-title">Project Terpilih</h2>
+    <p class="section-sub">Beberapa project yang mencerminkan kemampuan teknis dan pemecahan masalah berbasis data.</p>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-thumb thumb-1">📈</div>
+      <div class="project-body">
+        <div class="project-type">Machine Learning</div>
+        <div class="project-title">Prediksi Churn Pelanggan E-Commerce</div>
+        <p class="project-desc">Model klasifikasi dengan akurasi 92% untuk memprediksi pelanggan yang berpotensi churn menggunakan XGBoost dan SHAP untuk interpretasi model.</p>
+      </div>
+      <div class="project-footer">
+        <span class="tag tag-purple">Python</span>
+        <span class="tag tag-orange">XGBoost</span>
+        <span class="tag tag-blue">SHAP</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb thumb-2">🗺️</div>
+      <div class="project-body">
+        <div class="project-type">Data Analysis</div>
+        <div class="project-title">Dashboard Analitik Penjualan Real-time</div>
+        <p class="project-desc">Dashboard interaktif Tableau yang memvisualisasikan tren penjualan, performa produk, dan KPI bisnis dari 500K+ transaksi harian.</p>
+      </div>
+      <div class="project-footer">
+        <span class="tag tag-blue">Tableau</span>
+        <span class="tag tag-amber">SQL</span>
+        <span class="tag tag-orange">Python</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb thumb-3">💬</div>
+      <div class="project-body">
+        <div class="project-type">NLP / Deep Learning</div>
+        <div class="project-title">Analisis Sentimen Ulasan Produk</div>
+        <p class="project-desc">Model NLP berbasis BERT untuk mengklasifikasikan sentimen ulasan produk marketplace Indonesia dengan akurasi 88% pada 100K data.</p>
+      </div>
+      <div class="project-footer">
+        <span class="tag tag-purple">BERT</span>
+        <span class="tag tag-orange">PyTorch</span>
+        <span class="tag tag-blue">HuggingFace</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="skills-bg">
+  <div class="about-grid">
+    <div>
+      <!--
+        CARA MENAMBAHKAN FOTO PROFIL:
+        1. Siapkan foto kamu (misal: foto.jpg)
+        2. Letakkan di folder yang SAMA dengan index.html
+        3. Ganti style pada div.about-photo menjadi:
+           style="background-image: url('foto.jpg'); background-size: cover; background-position: center top;"
+        4. Hapus teks emoji 👤 di dalamnya
+      -->
+      <div class="about-photo">
+        👤
+        <div class="about-photo-overlay">
+          <div class="about-name">Indra Pradipta Eka Putra</div>
+          <div class="about-role">Data Science Student · Telkom University</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-tag">Tentang Saya</div>
+      <h2 class="section-title">Halo, saya Indra 👋</h2>
+      <p style="color:var(--muted);line-height:1.85;margin-bottom:1rem">
+        Saya mahasiswa S1 Data Science di <strong style="color:var(--text)">Telkom University, Bandung</strong>. Saya sangat tertarik pada bagaimana data dapat mendorong pengambilan keputusan yang lebih baik dan menciptakan dampak positif di dunia nyata.
+      </p>
+      <p style="color:var(--muted);line-height:1.85;">
+        Aktif mengikuti kompetisi data dan terus mengembangkan skill analitik. Saat ini sedang mencari kesempatan magang untuk mengaplikasikan ilmu di lingkungan profesional.
+      </p>
+      <ul class="info-list">
+        <li>
+          <span class="label">🎓 Kampus</span>
+          <span class="value">Telkom University</span>
+        </li>
+        <li>
+          <span class="label">📊 Jurusan</span>
+          <span class="value">S1 Data Science</span>
+        </li>
+        <li>
+          <span class="label">📍 Lokasi</span>
+          <span class="value">Bandung, Indonesia</span>
+        </li>
+        <li>
+          <span class="label">📞 Telepon</span>
+          <span class="value"><a href="tel:+6282132273087" style="color:var(--text);text-decoration:none;">0821-3227-3087</a></span>
+        </li>
+        <li>
+          <span class="label">🏆 IPK</span>
+          <span class="value"><span class="gpa-pill">3.17 / 4.00</span></span>
+        </li>
+        <li>
+          <span class="label">🔍 Target</span>
+          <span class="value">Data Analyst / Data Science Intern</span>
+        </li>
+      </ul>
+
+      <!--
+        =============================================
+        CARA MENCANTUMKAN CV:
+        OPSI 1 - File PDF langsung (RECOMMENDED):
+          1. Simpan CV kamu sebagai "cv-indra.pdf"
+          2. Letakkan file pdf di folder yang SAMA dengan index.html
+          3. Tombol Download CV di bawah sudah otomatis berfungsi!
+
+        OPSI 2 - Google Drive:
+          1. Upload CV ke Google Drive
+          2. Klik kanan file > "Bagikan" > ubah akses jadi "Siapa saja yang punya link"
+          3. Klik "Salin link", lalu ganti href pada tombol di bawah
+             dengan link Google Drive kamu (ganti bagian /view dengan /export?format=pdf)
+
+        OPSI 3 - Link eksternal lainnya (Notion, Canva, dll):
+          Cukup ganti href di bawah dengan link publikmu
+        =============================================
+      -->
+      <a href="cv-indra.pdf" download class="btn-primary" style="margin-top:0.5rem">
+        ⬇ Download CV
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-bg">
+  <div class="contact-inner">
+    <div class="section-tag">Kontak</div>
+    <h2 class="section-title">Mari Berkolaborasi</h2>
+    <p style="color:var(--muted);line-height:1.8">
+      Sedang mencari kandidat magang di bidang data? Atau ingin berdiskusi tentang proyek data science? Jangan ragu untuk menghubungi Indra!
+    </p>
+    <div class="contact-links">
+      <!-- Ganti dengan email kamu yang sebenarnya -->
+      <a href="mailto:emailkamu@gmail.com?subject=Kesempatan%20Magang&body=Halo%20Indra,%20saya%20tertarik%20dengan%20portfolio%20Anda." class="contact-link email-link">
+  ✉️ Email
+      </a>
+      <a href="https://wa.me/6282132273087?text=Halo%20Indra,%20saya%20tertarik%20dengan%20portfolio%20Anda." target="_blank" class="contact-link phone">
+      📞 WhatsApp
+      </a>
+      <a href="https://www.linkedin.com/in/indra-pradipta-862418393" target="_blank" class="contact-link linkedin">
+        💼 LinkedIn
+      </a>
+      <a href="https://github.com/indraprdpta" target="_blank" class="contact-link github">
+        🐙 GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Indra Pradipta Eka Putra · Dibuat dengan ❤️ dari Bandung</p>
+</footer>
+
+</body>
+</html>
